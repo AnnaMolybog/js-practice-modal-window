@@ -15,9 +15,6 @@ services:
   php-fpm:
     build:
       context: .
-      args:
-        GROUPID: $group
-        USERID: $user
       dockerfile: php-fpm/Dockerfile
     container_name: modal-window-php-fpm
     working_dir: /application
