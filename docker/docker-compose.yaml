@@ -1,0 +1,28 @@
+version: "3.1"
+services:
+  webserver:
+    image: nginx:alpine
+    container_name: modal-window-webserver
+    working_dir: /application
+    volumes:
+      - ../:/application
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8000:80"
+    links:
+      - php-fpm
+
+  php-fpm:
+    build:
+      context: .
+      args:
+        GROUPID: $group
+        USERID: $user
+      dockerfile: php-fpm/Dockerfile
+    container_name: modal-window-php-fpm
+    working_dir: /application
+    volumes:
+      - ../:/application
+      - ./php-fpm/php-ini-overrides.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
+      - ./php-fpm/php-ini-overrides.ini:/etc/php/7.1/cli/conf.d/99-overrides.ini
+      - ./php-fpm/php-ini-overrides.ini:/etc/php/7.1/phpdbg/conf.d/99-overrides.ini

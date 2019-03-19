@@ -24,6 +24,13 @@ button {
     -webkit-animation-duration: 2.5s;
 }
 
+.status {
+  display: block;
+  color: rgba(132, 148, 123, 0.96);
+  text-align: center;
+  margin-top: 10px;
+}
+
 @-webkit-keyframes fade {
     from {
       opacity: 0.1;
